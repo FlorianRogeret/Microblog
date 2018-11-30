@@ -55,7 +55,7 @@ ROOT_URLCONF = 'microlly.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join('/home/florian/microlly/microlly/templates', 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
