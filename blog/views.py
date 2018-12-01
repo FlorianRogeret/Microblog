@@ -13,11 +13,17 @@ def index(request):
     return render(request, 'index.html', locals())
 
 def register(request):
-    form = RegisterForm(request.POST or None)
-
-    if form.is_valid(): 
-        username = form.cleaned_data['username']
-        password = form.cleaned_data['password']
-        envoi = True
-
     return render(request, 'registerform.html', locals())
+
+def log(request):
+    return render(request, 'logform.html', locals())
+
+def post(request):
+    return render(request, 'postform.html', locals())
+
+#    form = RegisterForm(request.POST or None)
+
+#    if form.is_valid(): 
+#        username = form.cleaned_data['username']
+#        password = form.cleaned_data['password']
+#        envoi = True
