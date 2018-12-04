@@ -1,3 +1,4 @@
+{% extends "_base.html" %}
 {% load static %}
 <html>
     <head>
@@ -5,13 +6,14 @@
     </head>
     <body>
         <div class="page-top">
-            <h1><a href="/blog">Microlly Blog</a></h1>
+            <h1><a href="/">Microlly Blog</a></h1>
         </div>
         <div class="content container">
             <div class="row">
                 <div class="col-md-8">
                     {% block content %}
                         <form method="post" action="">
+                            {% csrf_token %}
                             <p>         
                                 <label for="title">Titre:</label>  
                                 <br>                             
