@@ -22,15 +22,22 @@ def post(request):
         return render(request, 'postform.html', locals())
 
 def createusr(request):
-        pseudo = request.POST['pseudo']
-        passwd = request.POST['passwd']
-        user = User.objects.create_user(username=pseudo,password=passwd)
-        if user is None or pseudo.exists():
-                return redirect('register')
+        if request.method == 'POST':
+                form = RegisterForm(request.POST)
+                if form.is_valid():
+                        pseudo = form.cleaned_data['pseudo']
+                        passwd = form.cleaned_data['passwd']
+                        user = User.objects.create_user(username=pseudo,password=passwd)
+                        if user is None or pseudo.exists():
+                                return redirect('register')
+                        else:
+                                user.save()
+                                login(request, user)
+                                return redirect('') 
         else:
-                user.save()
-                login(request, user)
-                return redirect('') 
+                form = RegisterForm()
+
+        return render(request, 'test.html', {'form': form}) 
 
 def logusr(request):
         pseudo = request.POST['pseudo','']
