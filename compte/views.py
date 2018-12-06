@@ -4,8 +4,14 @@ from django.http import HttpResponse
 from .forms import RegisterForm
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
-
+from django.contrib.auth.forms import UserCreationForm
 # Create your views here.
+
+def signup_view(request):
+        form = UserCreationForm()
+        return render(request,'compte/signup.html',{'form':form})
+        
+
 
 def index(request):
         return render(request, 'blog/index.html')

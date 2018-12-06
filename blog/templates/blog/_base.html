@@ -1,9 +1,13 @@
+{% load static from staticfiles %}
 <!DOCTYPE html>
 <html>
     <head>
-        <title>{% block title %}Microlly Blog{% endblock %}</title>
+        <meta charset="utf-8">
+        <title>Microlly Blog</title>
+        <link rel="stylesheet" href="{% static 'style.css'%}">
     </head>
     <body>
+        <h1><a href="{% url 'blog:list'%}" Liens vers page principal ></a></h1>
         {% block body %}{% endblock %}
     </body>
 </html>
