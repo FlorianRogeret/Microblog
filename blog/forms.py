@@ -1,6 +1,8 @@
 from django import forms
 from . import models
 
-class PostForm(forms.Form):
-    title = forms.CharField(max_length=50)
-    object = forms.CharField(max_length=500)
+# Form to create a new article using the needed fields (title,body,slug) findable in the models.py 
+class CreateArticles(forms.ModelForm):
+    class Meta:
+        model = models.Article
+        fields = ['title','body','slug']

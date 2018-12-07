@@ -1,17 +1,11 @@
-<!--
-    <a href="/log">Se connecter</a>
-    <a href="/register">S'inscrire</a>
-    <br>
-    <a href="/article">Poster</a>
--->
-{% extends 'blog/_base.html'%}
+{% extends '_base.html'%}
 
 {% block body %}
 
     <div class = "articles">
         {% for article in articles %}
             <div class = "article">
-                <h2><a href = "{% url 'blog:detail' slug=article.slug%}">{{article.title}}</a></h2>
+                <h2><a href = "{% url 'article:detail' slug=article.slug%}">{{article.title}}</a></h2>
                 <p>{{article.snippet}}</p>
                 <p>{{article.creation_date}}</p>
             </div>
