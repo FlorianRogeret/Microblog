@@ -1,12 +1,9 @@
-En tant qu'utilisateur je souhaite pouvoir modifier ou supprimer une de mes publications 
-dans le but de corriger une erreur.
+modifier A faire
+supprimer A debugger
 
-En tant que visiteur je souhaite voir l'ensemble des publications d'un utilisateur 
-(sur plusieurs pages au besoin) dans le but de lire plus de publications de cet utilisateur.
+voir l'ensemble des publications d'un utilisateur  A faire
 
-Affichage utilisateur des posts
-
-Debuger un peu
+Gerer le fait que plusieurs articles peuvent avoir le même slug
 
 Test
 

@@ -11,5 +11,9 @@ urlpatterns = [
     path('create/',views.article_create, name='create'),
     #page that redirect to a specif article
     path('<slug>[\w]+)/',views.article_detail, name='detail'),
+    #Allow the user to delete an article
+    path('delete/',views.delete_view, name="delete"),
+    #Allow the user to modifie an article
+    path ('modifie/', views.modifie_view, name="modifie")
 ]
 

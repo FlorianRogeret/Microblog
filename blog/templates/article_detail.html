@@ -2,7 +2,11 @@
 {% block body %}
 
     <h2>{{article.title}}</h2>
+    <p>{{article.author}}</p>
     <p>{{article.body}}</p>
     <p>{{article.creation_date}}</p>
+
+    <li><a href="{% url 'article:delete' %}">Delete</a></li>
+    <li><a href="{% url 'article:modifie' %}">Modifie</a></li>
 
 {% endblock %}
