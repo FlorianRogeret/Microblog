@@ -7,14 +7,15 @@
         <link rel="stylesheet" href="{% static 'style.css'%}">
     </head>
     <body>
+        <h1><li><a href="{% url 'article:index'%}"> Microlly </a></li></h1>
         <header class="wrapper">
             <nav>
-                <ul>
+                <ul>                    
                     {% if user.is_authenticated %}
                         <li>
-                            <form class="logout-link" text = "Logout" action="{% url 'account:logout'%}" method="post">
+                            <form class="logout-link" action="{% url 'account:logout'%}" method="post">
                                 {% csrf_token %}
-                                <button type="submit" Logout></button>
+                                <input type="submit" value="Logout"></button>
                             </form>                            
                         </li>
                         <li><a href="{% url 'article:create' %}">Create a new article</a></li>
@@ -24,8 +25,7 @@
                     {% endif %}
                 </ul>
             </nav>
-        </header>
-        <h1><a href="{% url 'article:index'%}" Liens vers page principal ></a></h1>
+        </header>        
         {% block body %}{% endblock %}
     </body>
 </html>

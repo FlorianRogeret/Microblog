@@ -3,11 +3,12 @@
 
 from django.db import models
 from django.contrib.auth.models import User
+from django.db.models.functions import Lower
 
 # Create your models here.
 
 class Article(models.Model):
-    slug = models.SlugField()
+    id = models.AutoField(primary_key=True)
     title = models.CharField(max_length=100)
     body = models.TextField()
     creation_date = models.DateTimeField(auto_now_add=True)

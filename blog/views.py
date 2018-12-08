@@ -4,18 +4,19 @@ from .models import Article
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from . import forms
+from django.db import connection
 
 #Home page where all articles are findable order by the creation_date
 def article_liste(request):
         #Use to find all articles 
         articles = Article.objects.all().order_by('-creation_date')
         #Post them to the index.html so it can use it
-        return render(request, 'index.html',{'articles':articles})
+        return render(request, 'index.html',{'article':articles})
 
 #Page when you click on an article so it redirect to it
-def article_detail(request, slug):
-        #find the slug of an article
-        article = Article.objects.get(slug=slug)
+def article_detail(request, id):
+        #find the id of an article
+        article = Article.objects.get(id = id)
         #Post it to article_detail.html so it can use it
         return render(request,'article_detail.html',{'article':article})
 
@@ -44,37 +45,9 @@ def article_create(request):
         return render(request,'article_create.html',{'form':form})
 
 @login_required(login_url="/compte/login/")
-def delete_view(request, slug = None): 
-        instance = get_object_or_404(Article, slug=slug)
-        #Check the user
-        instance.delete()
-        return render(request, 'article:index')
-
-@login_required(login_url="/compte/login/")
-def modifie_view(request):
-        #if the method used is a post 
-        if request.method == 'POST':
-                #Get the information entered in the differents forms
-
-                #Verifier que l'utilisateur connecté est bien celui qui a crée l'article
-                #form = forms.CreateArticles(request.POST)      A changer
-
-                #If they are valid
-                if form.is_valid():
-                        #It will save the informations of thoses forms but no commit it yet 
-                        instance = form.save(commit = False)
-                        #It will take the author username
-                        instance.author = request.user
-                        #and then save the article
-                        instance.save()
-                        #It will then redirect to the homepage
-                        return redirect('article:index')
-        #If the method is not a post
-        #else : 
-                #It will create news empty forms
-
-                #form = forms.CreateArticles()          A changer
-
-        #If the form is not valid it will redirect the user to tis same page
-
-        #return render(request,'article_create.html',{'form':form})     Rediriger vers le template de modification
+def delete_article(request, id): 
+        instance = Article.objects.get(id = id)
+        #creator= instance.user.username
+        if request.method == "POST": #and request.user.is_authenticated and request.user.username == creator:
+                instance.delete()
+        return redirect('article:index')
