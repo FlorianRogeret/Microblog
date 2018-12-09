@@ -4,7 +4,7 @@
 
     <div class = "articles">
         {% for article in article %}
-            <div class = "article">
+            <div id="article" class = "article">
                 <h2><a href = "{% url 'article:detail' id=article.id%}">{{article.title}}</a></h2>
                 <h2><a href = "{% url 'article:article_user' author=article.author%}">{{article.author}}</a></h2>
                 <p>{{article.snippet}}</p>

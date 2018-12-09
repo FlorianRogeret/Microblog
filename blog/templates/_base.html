@@ -2,12 +2,13 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <link rel="stylesheet" href="{% static 'style.css'%}">
         <meta charset="utf-8">
         <title>Microlly Blog</title>
-        <link rel="stylesheet" href="{% static 'style.css'%}">
+        
     </head>
     <body>
-        <h1><li><a href="{% url 'article:index'%}"> Microlly </a></li></h1>
+        <h1 id="title"><li><a href="{% url 'article:index'%}"> Microlly </a></li></h1>
         <header class="wrapper">
             <nav>
                 <ul>                    
