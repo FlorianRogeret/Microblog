@@ -11,6 +11,8 @@ urlpatterns = [
     #page that redirect to a specif article
     path(r'<id>[\w]+)/',views.article_detail, name='detail'),
 
+    path(r'<author>[\w]+)/',views.article_user, name='article_user'),
+
     path('delete/',views.delete_article, name='delete')
 ]
 

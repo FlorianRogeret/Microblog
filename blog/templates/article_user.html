@@ -1,0 +1,16 @@
+{% extends '_base.html'%}
+
+{% block body %}
+
+    <div class = "articles">
+        {% for articles in article %}
+            <div class = "article">
+                <h2><a href = "{% url 'article:detail' id=article.id%}">{{articles.title}}</a></h2>
+                <p>{{articles.snippet}}</p>
+                <p>{{articles.creation_date}}</p>
+                
+            </div>
+        {% endfor %}
+    </div>
+
+{% endblock %}

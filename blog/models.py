@@ -19,6 +19,12 @@ class Article(models.Model):
     def __str__(self):
         return self.title
 
+    def __del__(self):
+        return self.id
+
+    def __aut__(self):
+        return self.author
+
     #Use to reduce body's article up to 100 charactres
     def snippet(self):
         return self.body[:100] + '...'

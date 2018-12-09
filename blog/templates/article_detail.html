@@ -2,9 +2,9 @@
 {% block body %}
 
     <h2>{{article.title}}</h2>
-    <p>{{article.author}}</p>
+    <h2><a href = "{% url 'article:article_user' author=article.author%}">{{article.author}}</a></h2>
     <p>{{article.body}}</p>
     <p>{{article.creation_date}}</p>
 
-    <li><a href="{% url 'article:delete' id=article.id%}">Delete</a></li>
+    <li><a href="{% url 'article:delete'%}">Delete</a></li>
 {% endblock %}
