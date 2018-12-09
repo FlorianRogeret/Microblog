@@ -6,5 +6,6 @@
     <p>{{article.body}}</p>
     <p>{{article.creation_date}}</p>
 
-    <li><a href="{% url 'article:delete'%}">Delete</a></li>
+    <li><a href="{% url 'article:delete' id=article.id author=article.author %}">Delete</a></li>
+    <li><a href="{% url 'article:modifie' author=article.author title=article.title body=article.body %}">Modifie</a></li>
 {% endblock %}

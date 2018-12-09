@@ -21,18 +21,20 @@ def article_detail(request, id):
         return render(request,'article_detail.html',{'article':article})
 
 #Home page where all articles are findable order by the creation_date
-def article_user(request,user=None):
+def article_user(request,author):
         #Use to find all articles 
-        article = Article.objects.filter(user=user).order_by('-creation_date')
+        author = Article.objects.get(author = author)
+        article = Article.objects.filter(author).order_by('-creation_date')
         #Post them to the index.html so it can use it
         return render(request, 'article_user.html',{'article':article})
 
 
 @login_required(login_url="/compte/login/")
-def delete_article(request, id=None): 
+def delete_article(request, id, author): 
         instance = Article.objects.get(id = id)
+        author = Article.objects.get(author = author)
         #creator= instance.user.username
-        if request.method == "POST": #and request.user.is_authenticated and request.user.username == creator:
+        if request.method == "POST" and request.user.is_authenticated and request.user.username == author:
                 instance.delete()
         return redirect('article:index')
 
@@ -60,3 +62,21 @@ def article_create(request):
         #If the form is not valid it will redirect the user to tis same page
         return render(request,'article_create.html',{'form':form})
 
+def article_update(request, author, title, body): 
+
+        if request.method == 'POST' and author.is_authenticated():  # S'il s'agit d'une requête POST
+                form = forms.EditArticles(request.POST)  # Nous reprenons les données
+  
+                if form.is_valid(): # Nous vérifions que les données envoyées sont valides
+        
+                        # Ici nous pouvons traiter les données du formulaire
+                        title = form.cleaned_data['title']
+                        body = form.cleaned_data['body']
+                        
+                        return render(request, 'index.html') # Redirect after POST
+  
+        else: # Si ce n'est pas du POST, c'est probablement une requête GET
+                # Nous créons un formulaire pré-rempli
+                form = forms.EditArticles(title = title, body = body)
+  
+        return render(request, 'index.html')

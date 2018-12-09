@@ -3,7 +3,6 @@
 
 from django.db import models
 from django.contrib.auth.models import User
-from django.db.models.functions import Lower
 
 # Create your models here.
 
@@ -27,4 +26,7 @@ class Article(models.Model):
 
     #Use to reduce body's article up to 100 charactres
     def snippet(self):
-        return self.body[:100] + '...'
+        if len(self.body) < 100:
+            return self.body
+        else:
+            return self.body[:100] + '...'
