@@ -9,34 +9,29 @@
     </head>
     <body>        
         <header>
-            <h1><div class="title"><a href="{% url 'article:index'%}"> Microlly </a></div>
-                            
-                {% if user.is_authenticated %}
-                    <p class="btn">
-                    <form class="btn" action="{% url 'account:logout'%}" method="post">
-                        {% csrf_token %}
-                        <input type="submit" value="Se déconnecter"></button>
-                    </form>                            
-                    <form class="btn" action="{% url 'article:create' %}" method="post">
-                        {% csrf_token %}
-                        <input type="submit" value="Créer un article"></button>
-                    </form>
-                    
-                {% else %}
-                    
-                    <form class="btn" action="{% url 'account:login' %}" method="post">
-                        {% csrf_token %}
-                        <input type="submit" value="Se connecter"></button>
-                    </form>
-                    <form class="btn" action="{% url 'account:signup' %}" method="post">
-                        {% csrf_token %}
-                        <input type="submit" value="S'inscrire"></button>
-                    </form>
-                    </p>
-                
-                {% endif %}
-            
-            </h1>
+                <div class="title"><a href="{% url 'article:index'%}"> Microlly </a></div> 
+                <div class="row">
+                    {% if user.is_authenticated %}
+                        <form action="{% url 'account:logout'%}" method="post">
+                            {% csrf_token %}
+                            <input id="btnlogout" class="btn" type="submit" value="Se déconnecter"></button>
+                        </form>                            
+                        <form action="{% url 'article:create' %}" method="post">
+                            {% csrf_token %}
+                            <input id="btncreate" class="btn" type="submit" value="Créer un article"></button>
+                        </form>                        
+                    {% else %}                        
+                        <form action="{% url 'account:login' %}" method="post">
+                            {% csrf_token %}
+                            <input class="btn" type="submit" value="Se connecter"></button>
+                        </form>
+                        <form action="{% url 'account:signup' %}" method="post">
+                            {% csrf_token %}
+                            <input class="btn" type="submit" value="S'inscrire"></button>
+                        </form>
+                        </p>                    
+                    {% endif %}
+                </div>   
         </header>        
         {% block body %}{% endblock %}
     </body>

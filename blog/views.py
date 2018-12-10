@@ -12,7 +12,7 @@ from datetime import datetime
 def article_liste(request):
         #Use to find all articles 
         article = Article.objects.all().order_by('-update_date')
-        paginator = Paginator(article,3)
+        paginator = Paginator(article,5)
         page = request.GET.get('page')
         article = paginator.get_page(page)        
         #Post them to the index.html so it can use it
@@ -31,7 +31,7 @@ def article_user(request,username):
         author = get_object_or_404(User, username = username)
         article = Article.objects.all().filter(author = author).order_by('-creation_date')
         #Use to find all articles 
-        paginator = Paginator(article,3)
+        paginator = Paginator(article,5)
         page = request.GET.get('page')
         article = paginator.get_page(page)        
         #Post them to the index.html so it can use it

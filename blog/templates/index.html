@@ -11,29 +11,38 @@
                         <a id = "artauthor" href = "{% url 'article:article_user' username=article.author%}">{{article.author}}</a>
                         publié le {{article.creation_date}}, 
                         {% if article.update_date != None %}
-                            mis a jour le {{article.update_date}}
+                            <p>mis a jour le {{article.update_date}}</p>
                         {% endif %}
                     </h2>                  
-                    <p>{{article.snippet}}</p>               
+                    <p>{{article.snippet}}</p>                     
+                    <p>
+                        <li>
+                            <a href="{% url 'article:delete' id=article.id %}">Supprimer</a>
+                            _____________________________________________
+                            <a href="{% url 'article:modifie' id=article.id %}">Modifier</a>
+                        </li>
+                    </p>              
                 </div>
             {% endfor %}
         {% endif %}
     </div>
-
-    {% if article.has_previous %}
-        <a href="?page=1"> << </a>
-        <a href="?page={{article.previous_page_number}}"> < </a>
-    {% endif %}
-    {% for num in article.paginator.page_range %}
-        {% if article.number == num %}
-            <strong>{{num}}</strong>
-        {% elif num > article.number|add:'-3' and num < article.number|add:'3' %}
-            {{num}}
+    <div id="pagination">
+        {% if article.has_previous %}
+            <a href="?page=1"> << </a>
+            <a href="?page={{article.previous_page_number}}"> < </a>
         {% endif %}
-    {% endfor %}
-    {% if article.has_next %}
-        <a href="?page={{article.next_page_number}}"> > </a>
-        <a href="?page={{article.paginator.num_pages}}"> >> </a>
-    {% endif %}
+        {% for num in article.paginator.page_range %}
+            {% if article.number == num %}
+                <strong>{{num}}</strong>
+            {% elif num > article.number|add:'-5' and num < article.number|add:'5' %}
+                {{num}}
+            {% endif %}
+        {% endfor %}
+        {% if article.has_next %}
+            <a href="?page={{article.next_page_number}}"> > </a>
+            <a href="?page={{article.paginator.num_pages}}"> >> </a>
+        {% endif %}
+    </div>
+    
 
 {% endblock %}
