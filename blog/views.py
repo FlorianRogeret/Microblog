@@ -5,11 +5,15 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from . import forms
 from django.db import connection
+from django.core.paginator import Paginator
 
 #Home page where all articles are findable order by the creation_date
 def article_liste(request):
         #Use to find all articles 
         article = Article.objects.all().order_by('-creation_date')
+        paginator = Paginator(article,3)
+        page = request.GET.get('page')
+        article = paginator.get_page(page)        
         #Post them to the index.html so it can use it
         return render(request,'index.html',{'article':article})
 
@@ -25,6 +29,10 @@ def article_user(request,username):
         #Use to find all articles 
         author = get_object_or_404(User, username = username)
         article = Article.objects.all().filter(author = author).order_by('-creation_date')
+        #Use to find all articles 
+        paginator = Paginator(article,3)
+        page = request.GET.get('page')
+        article = paginator.get_page(page)        
         #Post them to the index.html so it can use it
         return render(request, 'article_user.html', {'article':article, 'author':author})
 

@@ -1,7 +1,6 @@
 {% extends '_base.html'%}
 
 {% block body %}
-
     <div class = "articles">
         {% if article %}
             {% for article in article %}
@@ -15,5 +14,21 @@
             {% endfor %}
         {% endif %}
     </div>
+
+    {% if article.has_previous %}
+        <a href="?page=1"> << </a>
+        <a href="?page={{article.previous_page_number}}"> < </a>
+    {% endif %}
+    {% for num in article.paginator.page_range %}
+        {% if article.number == num %}
+            <strong>{{num}}</strong>
+        {% elif num > article.number|add:'-3' and num < article.number|add:'3' %}
+            {{num}}
+        {% endif %}
+    {% endfor %}
+    {% if article.has_next %}
+        <a href="?page={{article.next_page_number}}"> > </a>
+        <a href="?page={{article.paginator.num_pages}}"> >> </a>
+    {% endif %}
 
 {% endblock %}
