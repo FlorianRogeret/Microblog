@@ -1,9 +1,14 @@
 {% extends '_base.html' %}
 {% block body %}
     <h1>Signup</h1>
-    <form class="site-form" action="{% url 'account:signup' %}" method="post">
+    <form id="log" action="{% url 'account:signup' %}" method="post">
         {% csrf_token %}
         {{ form }}
+<<<<<<< HEAD
         <input type="submit" value="S'inscrire">
+=======
+        <br>
+        <input type="submit" value="Signup">
+>>>>>>> 968fd850b00d0b6b361f8f55a93fe50898824ffe
     </form>
 {% endblock %}

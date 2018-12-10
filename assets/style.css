@@ -27,6 +27,14 @@
     background-color: rgb(0, 0, 0);
 }
 
+#log{
+    border: 2px double rgb(153, 4, 4);
+    right: 40% ;
+    left: 40%;
+    background-color: rgb(0, 0, 0);
+    color: white;
+}
+
 /* Le titre de l'article*/
 #arttitle {
     margin:left;
@@ -49,6 +57,11 @@ body{
 p,h1, h2{
     color: white;
     font-family: serif;
+}
+
+h3{
+    color: black;
+    font-size: 300%
 }
 
 
