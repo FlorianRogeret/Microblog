@@ -4,27 +4,40 @@
     <head>
         <link rel="stylesheet" href="{% static 'style.css'%}">
         <meta charset="utf-8">
-        <title>Microlly Blog</title>        
+        <title>Microlly Blog</title>      
+         
     </head>
     <body>
-        <h1 id="title"><li><a href="{% url 'article:index'%}"> Microlly </a></li></h1>
-        <header class="wrapper">
-            <nav>
-                <ul>                    
-                    {% if user.is_authenticated %}
-                        <li>
-                            <form class="logout-link" action="{% url 'account:logout'%}" method="post">
-                                {% csrf_token %}
-                                <input type="submit" value="Logout"></button>
-                            </form>                            
-                        </li>
-                        <li><a href="{% url 'article:create' %}">Create a new article</a></li>
-                    {% else %}
-                        <li><a href="{% url 'account:login' %}">Login</a></li>
-                        <li><a href="{% url 'account:signup' %}">Signup</a></li>
-                    {% endif %}
-                </ul>
-            </nav>
+        
+        <header>
+            <h1><div class="title"><a href="{% url 'article:index'%}"> Microlly </a></div>
+                            
+                {% if user.is_authenticated %}
+                    <p class="btn">
+                    <form class="btn" action="{% url 'account:logout'%}" method="post">
+                        {% csrf_token %}
+                        <input type="submit" value="Logout"></button>
+                    </form>                            
+                    <form class="btn" action="{% url 'article:create' %}" method="post">
+                        {% csrf_token %}
+                        <input type="submit" value="Create a new article"></button>
+                    </form>
+                    
+                {% else %}
+                    
+                    <form class="btn" action="{% url 'account:login' %}" method="post">
+                        {% csrf_token %}
+                        <input type="submit" value="Login"></button>
+                    </form>
+                    <form class="btn" action="{% url 'account:signup' %}" method="post">
+                        {% csrf_token %}
+                        <input type="submit" value="Signup"></button>
+                    </form>
+                    </p>
+                
+                {% endif %}
+            
+        </h1>
         </header>        
         {% block body %}{% endblock %}
     </body>
