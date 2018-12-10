@@ -5,26 +5,44 @@
         <meta charset="utf-8">
         <title>Microlly Blog</title>
         <link rel="stylesheet" href="{% static 'style.css'%}">
+        <link rel="simplegrid" href="{% static 'simplegrid.css'%}">
     </head>
     <body>
-        <h1><li><a href="{% url 'article:index'%}"> Microlly </a></li></h1>
-        <header class="wrapper">
-            <nav>
-                <ul>                    
-                    {% if user.is_authenticated %}
-                        <li>
-                            <form class="logout-link" action="{% url 'account:logout'%}" method="post">
-                                {% csrf_token %}
-                                <input type="submit" value="Logout"></button>
-                            </form>                            
-                        </li>
-                        <li><a href="{% url 'article:create' %}">Create a new article</a></li>
-                    {% else %}
-                        <li><a href="{% url 'account:login' %}">Login</a></li>
-                        <li><a href="{% url 'account:signup' %}">Signup</a></li>
-                    {% endif %}
-                </ul>
-            </nav>
+        <header id="wrapper">
+            <div class="grid">
+                <div class="col-1-2">
+                    <h1>
+                        <a id="title" href="{% url 'article:index'%}">Microlly </a>
+                    </h1> 
+                </div>
+                {% if user.is_authenticated %}
+                    <div class="col-1-4">
+                        <form id="btnlogout" class="logout-link" action="{% url 'account:logout'%}" method="post">
+                            {% csrf_token %}
+                            <input type="submit" value="Logout"></button>
+                        </form>  
+                    </div>
+                    <div class="col-1-4">
+                        <form id="btncrea" class="logout-link" action="{% url 'article:create'%}" method="post">
+                            {% csrf_token %}
+                            <input type="submit" value="Create a new article"></button>
+                        </form> 
+                    </div>  
+                {% else %}
+                    <div class="col-1-4">
+                        <form id="btnlogin" class="logout-link" action="{% url 'account:login'%}" method="post">
+                            {% csrf_token %}
+                            <input type="submit" value="Login"></button>
+                        </form> 
+                    </div>
+                    <div class="col-1-4">
+                        <form id="btnsig" class="logout-link" action="{% url 'account:signup'%}" method="post">
+                            {% csrf_token %}
+                            <input type="submit" value="Signup"></button>
+                        </form> 
+                    </div>                                
+                {% endif %}
+            </div>
         </header>        
         {% block body %}{% endblock %}
     </body>

@@ -1,3 +1,100 @@
+/* ID */
+
+/* Bouton menu */
+#title{
+    font-family: Quantify;
+    font-size: 70px;
+    margin:left;
+}
+
+/* Bandeau */
+#wrapper { 
+    background: rgb(180, 18, 18); 
+    width:100%;  
+}
+
+/* L'article sur la page index */
+#article{
+    border: 2px double black;
+}
+
+/* Le titre de l'article*/
+#arttitle {
+    margin:left;
+} 
+
+/* L'auteur de l'article */
+#artauthor {
+    margin:center;
+} 
+
+/* COMPOSANTS */
+
 body{
-    background: gray;
+    background-image: url("fondsite.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+p,h1, h2{
+    color: white;
+    font-family: serif;
+}
+
+
+a {
+    text-decoration: none;
+}
+a:link, a:visited {
+    color: blue;
+}
+a:hover {
+    color: red;
+}
+/*
+#arttitle, #artauthor{
+    display: inline-block;
+    margin-left: 10px; 
+}*/
+
+
+@font-face {
+    font-family: Quantify;
+    src: url(Quantify.ttf);
+}
+
+
+
+/*Button*/
+.button {
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+}
+  
+.button:hover {
+    background-color: #4CAF50; /* Green */
+    color: white;
+}
+
+#btnlogout{
+    padding-left: 50%;
+}
+
+#btncrea{
+    width: 50px;
+    height: 50px;
+}
+
+#btnlogin{
+    float:center;
+}
+
+#btnsig{
+    float:right;
+}
+
+/* Multiple */
+
+#btnlogin, #btnsig{
+    align-items: baseline;
 }
