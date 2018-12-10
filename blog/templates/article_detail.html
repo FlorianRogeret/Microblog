@@ -2,7 +2,7 @@
 {% block body %}
 
     <h2>{{article.title}}</h2>
-    <h2 id="title"><a href = "{% url 'article:article_user' username=User.username%}"></a>{{article.author}}</a></h2>
+    <h2 id="author"><a href = "{% url 'article:article_user' username=article.author%}"></a>{{article.author}}</a></h2>
     <p id="article">{{article.body}}</p>
     <p id="article">{{article.creation_date}}</p>
 
