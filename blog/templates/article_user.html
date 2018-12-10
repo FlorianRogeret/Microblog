@@ -1,14 +1,13 @@
 {% extends '_base.html'%}
 
 {% block body %}
-
+    <h1>Voici les publications de {{author}}</h1>
     <div class = "articles">
         {% for articles in article %}
             <div class = "article">
-                <h2><a href = "{% url 'article:detail' id=article.id%}">{{articles.title}}</a></h2>
+                <h2><a href = "{% url 'article:detail' id=articles.id%}">{{articles.title}}</a></h2>
                 <p>{{articles.snippet}}</p>
-                <p>{{articles.creation_date}}</p>
-                
+                <p>{{articles.creation_date}}</p>                
             </div>
         {% endfor %}
     </div>

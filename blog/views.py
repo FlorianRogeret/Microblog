@@ -16,27 +16,26 @@ def article_liste(request):
 #Page when you click on an article so it redirect to it
 def article_detail(request, id):
         #find the id of an article
-        article = Article.objects.get(id = id)
+        article = get_object_or_404(Article, id = id)
         #Post it to article_detail.html so it can use it
         return render(request,'article_detail.html',{'article':article})
 
 #Home page where all articles are findable order by the creation_date
-def article_user(request,author):
+def article_user(request,username):
         #Use to find all articles 
-        author = Article.objects.get(author = author)
-        article = Article.objects.filter(author).order_by('-creation_date')
+        author = get_object_or_404(User, username = username)
+        article = Article.objects.all().filter(author = author).order_by('-creation_date')
         #Post them to the index.html so it can use it
-        return render(request, 'article_user.html',{'article':article})
+        return render(request, 'article_user.html', {'article':article, 'author':author})
 
 
 @login_required(login_url="/compte/login/")
-def delete_article(request, id, author): 
-        instance = Article.objects.get(id = id)
-        author = Article.objects.get(author = author)
-        #creator= instance.user.username
-        if request.method == "POST" and request.user.is_authenticated and request.user.username == author:
-                instance.delete()
-        return redirect('article:index')
+def delete_article(request, id): 
+        #article = Article.objects.get(id = id)
+        article = get_object_or_404(Article, id=id)
+        if request.user.username == article.author.username:
+                article.delete()
+        return render(request,'article_detail.html',{'article':article})
 
 #View that allow to create an article only if the user is logged in
 @login_required(login_url="/compte/login/")
@@ -62,21 +61,24 @@ def article_create(request):
         #If the form is not valid it will redirect the user to tis same page
         return render(request,'article_create.html',{'form':form})
 
-def article_update(request, author, title, body): 
+@login_required(login_url="/compte/login/")
+def article_update(request, id): 
+        article = get_object_or_404(Article, id=id)
+        if request.user.username == article.author.username:
+                return render(request, 'article_modifie.html', {'article' : article})               
+        else:
+                return render(request,'article_detail.html',{'article':article})
 
-        if request.method == 'POST' and author.is_authenticated():  # S'il s'agit d'une requête POST
-                form = forms.EditArticles(request.POST)  # Nous reprenons les données
-  
-                if form.is_valid(): # Nous vérifions que les données envoyées sont valides
+@login_required(login_url='compte/login/')
+def article_doupdate(request, id):
+        if request.method == 'POST':
+                article = get_object_or_404(Article, id = id)
+                article.title = request.POST['title']
+                article.body = request.POST['body']
+                #article.updated = now()
+                article.save()
+                return render(request,'article_detail.html',{'article':article})
+        else:
+                return render(request,'article_modifie.html',{'article':article})
         
-                        # Ici nous pouvons traiter les données du formulaire
-                        title = form.cleaned_data['title']
-                        body = form.cleaned_data['body']
                         
-                        return render(request, 'index.html') # Redirect after POST
-  
-        else: # Si ce n'est pas du POST, c'est probablement une requête GET
-                # Nous créons un formulaire pré-rempli
-                form = forms.EditArticles(title = title, body = body)
-  
-        return render(request, 'index.html')
