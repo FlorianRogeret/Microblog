@@ -9,7 +9,10 @@
                         <a id = "arttitle" href = "{% url 'article:detail' article.id%}">{{article.title}}</a>
                         écrit par
                         <a id = "artauthor" href = "{% url 'article:article_user' username=article.author%}">{{article.author}}</a>
-                        publié le {{article.creation_date}}
+                        publié le {{article.creation_date}}, 
+                        {% if article.update_date != None %}
+                            mis a jour le {{article.update_date}}
+                        {% endif %}
                     </h2>                  
                     <p>{{article.snippet}}</p>               
                 </div>

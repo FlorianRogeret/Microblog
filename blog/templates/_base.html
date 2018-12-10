@@ -16,22 +16,22 @@
                     <p class="btn">
                     <form class="btn" action="{% url 'account:logout'%}" method="post">
                         {% csrf_token %}
-                        <input type="submit" value="Logout"></button>
+                        <input type="submit" value="Se déconnecter"></button>
                     </form>                            
                     <form class="btn" action="{% url 'article:create' %}" method="post">
                         {% csrf_token %}
-                        <input type="submit" value="Create a new article"></button>
+                        <input type="submit" value="Créer un article"></button>
                     </form>
                     
                 {% else %}
                     
                     <form class="btn" action="{% url 'account:login' %}" method="post">
                         {% csrf_token %}
-                        <input type="submit" value="Login"></button>
+                        <input type="submit" value="Se connecter"></button>
                     </form>
                     <form class="btn" action="{% url 'account:signup' %}" method="post">
                         {% csrf_token %}
-                        <input type="submit" value="Signup"></button>
+                        <input type="submit" value="S'inscrire"></button>
                     </form>
                     </p>
                 

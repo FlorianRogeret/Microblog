@@ -6,11 +6,12 @@ from django.contrib.auth.decorators import login_required
 from . import forms
 from django.db import connection
 from django.core.paginator import Paginator
+from datetime import datetime
 
 #Home page where all articles are findable order by the creation_date
 def article_liste(request):
         #Use to find all articles 
-        article = Article.objects.all().order_by('-creation_date')
+        article = Article.objects.all().order_by('-update_date')
         paginator = Paginator(article,3)
         page = request.GET.get('page')
         article = paginator.get_page(page)        
@@ -83,7 +84,7 @@ def article_doupdate(request, id):
                 article = get_object_or_404(Article, id = id)
                 article.title = request.POST['title']
                 article.body = request.POST['body']
-                #article.updated = now()
+                article.update_date = datetime.now()
                 article.save()
                 return render(request,'article_detail.html',{'article':article})
         else:

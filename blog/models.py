@@ -11,18 +11,12 @@ class Article(models.Model):
     title = models.CharField(max_length=100)
     body = models.TextField()
     creation_date = models.DateTimeField(auto_now_add=True)
+    update_date = models.DateTimeField(auto_now_add=True)
     author = models.ForeignKey(User, default=None, on_delete=models.CASCADE)
-    #update_date = models.DateTimeField(auto_now_add=True)
     
     
     def __str__(self):
         return self.title
-
-    def __del__(self):
-        return self.id
-
-    def __aut__(self):
-        return self.author
 
     #Use to reduce body's article up to 100 charactres
     def snippet(self):

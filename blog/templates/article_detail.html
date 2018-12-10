@@ -5,7 +5,11 @@
     <h2 id="author"><a href = "{% url 'article:article_user' username=article.author%}"></a>{{article.author}}</a></h2>
     <p id="article">{{article.body}}</p>
     <p id="article">{{article.creation_date}}</p>
+    {% if article.update_date != None %}
+        <p id="article">{{article.update_date}}</p>
+    {% endif %}
+    
 
-    <li><a href="{% url 'article:delete' id=article.id %}">Delete</a></li>
-    <li><a href="{% url 'article:modifie' id=article.id %}">Modifie</a></li>
+    <li><a href="{% url 'article:delete' id=article.id %}">Supprimer</a></li>
+    <li><a href="{% url 'article:modifie' id=article.id %}">Modifier</a></li>
 {% endblock %}
