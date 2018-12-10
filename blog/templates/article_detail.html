@@ -1,24 +1,16 @@
 {% extends '_base.html' %}
 {% block body %}
 
-<<<<<<< HEAD
-    <h2>{{article.title}}</h2>
-    <h2 id="author"><a href = "{% url 'article:article_user' username=article.author%}"></a>{{article.author}}</a></h2>
-    <p id="article">{{article.body}}</p>
-    <p id="article">{{article.creation_date}}</p>
-    {% if article.update_date != None %}
-        <p id="article">{{article.update_date}}</p>
-    {% endif %}
-=======
     <div id="log" style="text-align:center;">
         <h1>{{article.title}} écrit par
-            <a href = "{% url 'article:article_user' username=article.author%}">{{article.author}}</a>
-            publié le {{article.creation_date}}
-        </h1>
-        
+                <a href = "{% url 'article:article_user' username=article.author%}">{{article.author}}</a>
+                publié le {{article.creation_date}}
+                {% if article.update_date != None %}
+                    modifié le {{article.update_date}}
+                {% endif %}
+        </h1>        
         <p style="text-align:center;font-size: 100%;">{{article.body}}</p>
     </div>
->>>>>>> 968fd850b00d0b6b361f8f55a93fe50898824ffe
     
 
     <li><a href="{% url 'article:delete' id=article.id %}">Supprimer</a></li>

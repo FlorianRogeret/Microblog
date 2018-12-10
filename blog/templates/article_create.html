@@ -6,12 +6,8 @@
         <form id="log" action="{% url 'article:create' %}" method="POST">
             {% csrf_token %}
             {{form}}
-<<<<<<< HEAD
-            <input type="submit" value="Créer">
-=======
             <br>
-            <input type="submit" value="Submit">
->>>>>>> 968fd850b00d0b6b361f8f55a93fe50898824ffe
+            <input type="submit" value="Créer">
         </form>        
     </div>
 {% endblock %}
