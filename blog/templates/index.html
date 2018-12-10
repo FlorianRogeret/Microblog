@@ -7,6 +7,7 @@
             <div id = "article">
                 <h2><a id = "arttitle" href = "{% url 'article:detail' id=article.id%}">{{article.title}}</a></h2>
                 <h2><a id = "artauthor" href = "{% url 'article:article_user' author=article.author%}">{{article.author}}</a></h2>
+
                 <p>{{article.snippet}}</p>
                 <p>publié le {{article.creation_date}}</p>                
             </div>
