@@ -3,9 +3,10 @@
 {% block body %}
     <div class>
         <h2>Create a new Article</h2>
-        <form class="site-form" action="{% url 'article:create' %}" method="POST">
+        <form id="log" action="{% url 'article:create' %}" method="POST">
             {% csrf_token %}
             {{form}}
+            <br>
             <input type="submit" value="Submit">
         </form>        
     </div>
