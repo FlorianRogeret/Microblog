@@ -16,11 +16,9 @@
                     </h2>                  
                     <p>{{article.snippet}}</p>                     
                     <p>
-                        <li>
-                            <a href="{% url 'article:delete' id=article.id %}">Supprimer</a>
-                            _____________________________________________
-                            <a href="{% url 'article:modifie' id=article.id %}">Modifier</a>
-                        </li>
+                        <a href="{% url 'article:delete' id=article.id %}">Supprimer</a>
+                        OU
+                        <a href="{% url 'article:modifie' id=article.id %}">Modifier</a>
                     </p>              
                 </div>
             {% endfor %}

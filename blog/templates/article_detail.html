@@ -11,11 +11,9 @@
         </h1>        
         <p style="text-align:center;font-size: 100%;">{{article.body}}</p>
         <p>
-            <li>
-                <a href="{% url 'article:delete' id=article.id %}">Supprimer</a>
-                OU
-                <a href="{% url 'article:modifie' id=article.id %}">Modifier</a>
-            </li>
+            <a href="{% url 'article:delete' id=article.id %}">Supprimer</a>
+            OU
+            <a href="{% url 'article:modifie' id=article.id %}">Modifier</a>
         </p> 
     </div>
       

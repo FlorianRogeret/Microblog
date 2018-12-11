@@ -7,6 +7,7 @@ from . import forms
 from django.db import connection
 from django.core.paginator import Paginator
 from datetime import datetime
+from django.urls import reverse
 
 #Home page where all articles are findable order by the creation_date
 def article_liste(request):
@@ -44,6 +45,13 @@ def delete_article(request, id):
         article = get_object_or_404(Article, id=id)
         if request.user.username == article.author.username:
                 article.delete()
+                #Use to find all articles 
+                article = Article.objects.all().order_by('-update_date')
+                paginator = Paginator(article,5)
+                page = request.GET.get('page')
+                article = paginator.get_page(page)        
+                #Post them to the index.html so it can use it
+                return render(request,'index.html',{'article':article})
         return render(request,'article_detail.html',{'article':article})
 
 #View that allow to create an article only if the user is logged in
