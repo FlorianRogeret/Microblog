@@ -14,7 +14,7 @@
                     {% if user.is_authenticated %}
                         <form action="{% url 'account:logout'%}" method="post">
                             {% csrf_token %}
-                            <input id="btnlogout" class="btn" type="submit" value="Se déconnecter"></button>
+                            <input class="btn" type="submit" value="Se déconnecter"></button>
                         </form>                            
                         <form action="{% url 'article:create' %}" method="post">
                             {% csrf_token %}
