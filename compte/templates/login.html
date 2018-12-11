@@ -1,12 +1,16 @@
 {% extends '_base.html' %}
 {% block body %}
     <h3>Login</h3>
-    <form id="log" action="{% url 'account:login' %}" method="post">
+    {# Form that allow to login #}
+    <form id="form_login" class="log" action="{% url 'account:login' %}" method="post">
         {% csrf_token %}
+        {#Display the created form#}
         {{ form }}
+        {#If the user where login form an other page#}
         {% if request.GET.next %}
+            {#It will redirect to that page #}
             <input type="hidden" name ="next" value="{{request.GET.next}}">
         {% endif %}
-        <input type="submit" value="Se connecter">
+        <input class="btn" type="submit" value="Se connecter">
     </form>
 {% endblock %}

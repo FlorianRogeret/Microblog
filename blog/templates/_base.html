@@ -2,6 +2,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+        {#Link the site to the style.css#}
         <link rel="stylesheet" href="{% static 'style.css'%}">
         <meta charset="utf-8">
         <title>Microlly Blog</title>      
@@ -11,20 +12,26 @@
         <header>
                 <div class="title"><a href="{% url 'article:index'%}"> Microlly </a></div> 
                 <div class="row">
+                    {#If the user is login#}
                     {% if user.is_authenticated %}
+                        {#We display the button that allows to disconnnect#}
                         <form action="{% url 'account:logout'%}" method="post">
                             {% csrf_token %}
                             <input id="btnlogout" class="btn" type="submit" value="Se déconnecter"></button>
-                        </form>                            
+                        </form>       
+                        {#We display the button that allows to create an article#}             
                         <form action="{% url 'article:create' %}" method="post">
                             {% csrf_token %}
                             <input id="btncreate" class="btn" type="submit" value="Créer un article"></button>
-                        </form>                        
-                    {% else %}                        
+                        </form> 
+                    {#If the user is not login#}                       
+                    {% else %}      
+                        {#We display the button that allows to login#}                 
                         <form action="{% url 'account:login' %}" method="post">
                             {% csrf_token %}
                             <input class="btn" type="submit" value="Se connecter"></button>
                         </form>
+                        {#We display the button that allows to sigin#}   
                         <form action="{% url 'account:signup' %}" method="post">
                             {% csrf_token %}
                             <input class="btn" type="submit" value="S'inscrire"></button>
@@ -32,7 +39,8 @@
                         </p>                    
                     {% endif %}
                 </div>   
-        </header>        
+        </header>      
+        {# Block for  the other pages #}  
         {% block body %}{% endblock %}
     </body>
 </html>

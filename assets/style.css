@@ -27,12 +27,50 @@
     background-color: rgb(0, 0, 0);
 }
 
-#log{
+/* FORMULAIRES */
+
+.log{
     border: 2px double rgb(153, 4, 4);
     right: 40% ;
     left: 40%;
     background-color: rgb(0, 0, 0);
     color: white;
+}
+
+#form_article_create,#form_article_modifie,#form_login{
+    display: block;
+    margin: 20px 0 0 0;
+    padding: 10px;
+}
+
+.helptext,.helptext ul{
+    margin:0 auto 20px;
+    display:block;
+}
+
+.errorlist li{
+    padding : 10px;
+    list-style-type: none;
+    border: 1px solid white;
+    color: red;
+    margin: 10px 0;
+}
+
+.errorlist{
+    padding: 0;
+}
+
+#id_username,#id_password,#id_password1,#id_password2,#title,#body,#id_title,#id_body{
+    width: 100%;
+}
+
+#articlebody{
+    text-align:center;
+    font-size: 100%;
+}
+
+#articledetail{
+    text-align:center;
 }
 
 /* COMPOSANTS */
@@ -51,6 +89,7 @@ h3{
     font-size: 300%
 }
 
+/* LIENS */
 
 a {
     text-decoration: none;

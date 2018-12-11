@@ -3,11 +3,13 @@
 {% block body %}
     <div class>
         <h3>Create a new Article</h3>
-        <form id="log" action="{% url 'article:create' %}" method="POST">
+        {#form that allow to create a new article#}
+        <form id="form_article_create" class="log" action="{% url 'article:create' %}" method="POST">
             {% csrf_token %}
+            {# form passed in argument #}
             {{form}}
             <br>
-            <input type="submit" value="Créer">
+            <input class="btn" type="submit" value="Créer">
         </form>        
     </div>
 {% endblock %}
