@@ -1,18 +1,19 @@
 {% extends '_base.html' %}
 
 {% block body %}
-
-        <form action="{% url 'article:domodifie' article.id %}" method="POST">
-            {% csrf_token %}
-            <label>Votre titre</label> : 
-            </br>
-            <input type="text" name="title" value="{{article.title}}">
-            </br>
-            <label>Votre contenu</label> : 
-            </br>
-            <textarea rows="10" cols="50" name="body">{{article.body}}</textarea>
-            </br>
-            <input type="submit" value="Modifier">
-        </form>
-
+    {# Form that allow to modifie an article #}
+    <form class="log" id="form_article_modifie" action="{% url 'article:domodifie' article.id %}" method="POST">
+        {% csrf_token %}
+        <label>Votre titre</label> : 
+        </br>
+        {# Initialise the input field with the current title of the article #}
+        <input id="title" type="text" name="title" value="{{article.title}}">
+        </br>
+        <label>Votre contenu</label> : 
+        </br>
+        {# Initialise the input field with the current body of the article #}
+        <textarea id="body" rows="10" cols="50" name="body">{{article.body}}</textarea>
+        </br>
+        <input class="btn" type="submit" value="Modifier">
+    </form>
 {% endblock %}

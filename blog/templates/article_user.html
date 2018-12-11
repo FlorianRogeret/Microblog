@@ -5,26 +5,42 @@
     <div class = "articles">
         {% for articles in article %}
             <div id = "article">
+                {# Display the clickable title of the user's article #}
                 <h2><a href = "{% url 'article:detail' id=articles.id%}">{{articles.title}}</a></h2>
+                {# Display the shortcut body of the user's article #}
                 <p>{{articles.snippet}}</p>
+                {# Display the creation date of the article #}
                 <p>{{articles.creation_date}}</p> 
+                {# Display the update date of the article #}
+                <p>{{articles.update_date}}</p> 
             </div>
         {% endfor %}
     </div>
     <div id="pagination">
+        {#If the article has previous pages#}
         {% if article.has_previous %}
+            {# Click on "<<" will redirect on the first page #}
             <a href="?page=1"> << </a>
+            {# Click on "<" will redirect on the previous page #}
             <a href="?page={{article.previous_page_number}}"> < </a>
         {% endif %}
+        {# Display the pagination number #}
         {% for num in article.paginator.page_range %}
+            {# If the number of the pagination is the number of the current page #}
             {% if article.number == num %}
+                {#Display the pages' number in strong font#}
                 <strong>{{num}}</strong>
+            {#Go through the pages from 'page-5' to 'page+5'#}
             {% elif num > article.number|add:'-5' and num < article.number|add:'5' %}
+                {#We display them#}
                 {{num}}
             {% endif %}
         {% endfor %}
+        {#If the article has next pages#}
         {% if article.has_next %}
+            {# Click on ">" will redirect on the next page #}
             <a href="?page={{article.next_page_number}}"> > </a>
+            {# Click on ">>" will redirect on the last page #}
             <a href="?page={{article.paginator.num_pages}}"> >> </a>
         {% endif %}
     </div>

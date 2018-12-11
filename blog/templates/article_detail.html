@@ -1,18 +1,26 @@
 {% extends '_base.html' %}
 {% block body %}
 
-    <div id="log" style="text-align:center;">
+    <div class="log" id="articledetail">
+        {# Display the title of the article #}
         <h1>{{article.title}} écrit par
-                <a href = "{% url 'article:article_user' username=article.author%}">{{article.author}}</a>
-                publié le {{article.creation_date}}
-                {% if article.update_date != None %}
-                    modifié le {{article.update_date}}
-                {% endif %}
-        </h1>        
-        <p style="text-align:center;font-size: 100%;">{{article.body}}</p>
+            {# Display the author and the creation date of the article #}
+            <a href = "{% url 'article:article_user' username=article.author%}">{{article.author}}</a>
+            publié le {{article.creation_date}}
+            {# if the update date is not none #}
+            {% if article.update_date != None %}
+                {#It display it#}
+                modifié le {{article.update_date}}
+            {% endif %}
+        </h1>       
+
+        {# Display the body of the article #}
+        <p id="articlebody">{{article.body}}</p>
         <p>
+            {# Display the link to delete the article #}
             <a href="{% url 'article:delete' id=article.id %}">Supprimer</a>
             OU
+            {# Display the link to edit the article #}
             <a href="{% url 'article:modifie' id=article.id %}">Modifier</a>
         </p> 
     </div>

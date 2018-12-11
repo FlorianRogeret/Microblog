@@ -13,8 +13,11 @@ from django.urls import reverse
 def article_liste(request):
         #Use to find all articles 
         article = Article.objects.all().order_by('-update_date')
+        #Create the pages with only 5 articles
         paginator = Paginator(article,5)
+        #Page form the url
         page = request.GET.get('page')
+        #Send the article from that page
         article = paginator.get_page(page)        
         #Post them to the index.html so it can use it
         return render(request,'index.html',{'article':article})
@@ -28,31 +31,36 @@ def article_detail(request, id):
 
 #Home page where all articles are findable order by the creation_date
 def article_user(request,username):
-        #Use to find all articles 
+        #Use to find all articles from a specific user
         author = get_object_or_404(User, username = username)
         article = Article.objects.all().filter(author = author).order_by('-creation_date')
-        #Use to find all articles 
+        #Create the pages with only 5 articles
         paginator = Paginator(article,5)
+        #Page form the url
         page = request.GET.get('page')
+        #Send the article from that page
         article = paginator.get_page(page)        
-        #Post them to the index.html so it can use it
+        #Post the articles and the author to the article_user.html so it can use it
         return render(request, 'article_user.html', {'article':article, 'author':author})
 
 
 @login_required(login_url="/compte/login/")
 def delete_article(request, id): 
-        #article = Article.objects.get(id = id)
+        #Use to find all articles
         article = get_object_or_404(Article, id=id)
         if request.user.username == article.author.username:
                 article.delete()
                 #Use to find all articles 
                 article = Article.objects.all().order_by('-update_date')
+                #Create the pages with only 5 articles
                 paginator = Paginator(article,5)
+                #Page form the url
                 page = request.GET.get('page')
+                #Send the article from that page
                 article = paginator.get_page(page)        
                 #Post them to the index.html so it can use it
                 return render(request,'index.html',{'article':article})
-        return render(request,'article_detail.html',{'article':article})
+        return render(request,'article_detail.html')
 
 #View that allow to create an article only if the user is logged in
 @login_required(login_url="/compte/login/")
@@ -80,22 +88,29 @@ def article_create(request):
 
 @login_required(login_url="/compte/login/")
 def article_update(request, id): 
+        #Use to find all articles
         article = get_object_or_404(Article, id=id)
+        #If the user currently log is the author
         if request.user.username == article.author.username:
+                #We send him to the article.modifie.html page
                 return render(request, 'article_modifie.html', {'article' : article})               
         else:
-                return render(request,'article_detail.html',{'article':article})
+                #If not we send him to  article_detail.html
+                return render(request,'article_detail.html')
 
 @login_required(login_url='compte/login/')
 def article_doupdate(request, id):
-        if request.method == 'POST':
-                article = get_object_or_404(Article, id = id)
-                article.title = request.POST['title']
-                article.body = request.POST['body']
-                article.update_date = datetime.now()
-                article.save()
-                return render(request,'article_detail.html',{'article':article})
-        else:
-                return render(request,'article_modifie.html',{'article':article})
+        #We get the article thanks to the id
+        article = get_object_or_404(Article, id = id)
+        #The title's article became the one register in the form
+        article.title = request.POST['title']
+        #The body's article became the one register in the form
+        article.body = request.POST['body']
+        #We update the update date
+        article.update_date = datetime.now()
+        #We save the article
+        article.save()
+        #We redirect him to the article's page
+        return render(request,'article_detail.html',{'article':article})
         
                         
