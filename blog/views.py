@@ -60,7 +60,7 @@ def delete_article(request, id):
                 article = paginator.get_page(page)        
                 #Post them to the index.html so it can use it
                 return render(request,'index.html',{'article':article})
-        return render(request,'article_detail.html')
+        return render(request,'article_detail.html',{'article':article})
 
 #View that allow to create an article only if the user is logged in
 @login_required(login_url="/compte/login/")
@@ -96,7 +96,7 @@ def article_update(request, id):
                 return render(request, 'article_modifie.html', {'article' : article})               
         else:
                 #If not we send him to  article_detail.html
-                return render(request,'article_detail.html')
+                return render(request,'article_detail.html',{'article':article})
 
 @login_required(login_url='compte/login/')
 def article_doupdate(request, id):
