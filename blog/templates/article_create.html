@@ -2,7 +2,7 @@
 
 {% block body %}
     <div class>
-        <h3>Create a new Article</h3>
+        <h3>Créer un article</h3>
         {#form that allow to create a new article#}
         <form id="form_article_create" class="log" action="{% url 'article:create' %}" method="POST">
             {% csrf_token %}
