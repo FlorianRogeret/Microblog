@@ -2,7 +2,7 @@
 
 {% block body %}
     <div class>
-        <h2>Create a new Article</h2>
+        <h3>Create a new Article</h3>
         <form id="log" action="{% url 'article:create' %}" method="POST">
             {% csrf_token %}
             {{form}}
